@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Page</title>
+<meta name="generator" content="WYSIWYG Web Builder 18 - https://www.wysiwygwebbuilder.com">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="font-awesome.min.css" rel="stylesheet">
+<link href="Untitled1.css" rel="stylesheet">
+<link href="TAX.css" rel="stylesheet">
+<script src="jquery-3.6.0.min.js"></script>
+<script src="wb.panel.min.js"></script>
+<script>
+$(document).ready(function()
+{
+   $("#PanelMenu1").panel({animate: true, animationDuration: 200, animationEasing: 'linear', dismissible: true, display: 'overlay', position: 'right', toggle: true, overlay: true});
+});
+</script>
+</head>
+<body>
+<div id="Html1" style="position:absolute;left:0px;top:249px;width:100px;height:100px;z-index:4">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indian Tax Calculator</title>
+</head>
+<body>
+
+<div class="container">
+    <h2>Indian Tax Calculator</h2>
+    <form id="taxForm">
+        <label for="status">Select Status:</label>
+        <select id="status" name="status">
+            <option value="individual">Individual</option>
+            <option value="senior">Senior Citizen (60+)</option>
+            <option value="superSenior">Super Senior Citizen (80+)</option>
+        </select>
+        <label for="income">Income (in INR):</label>
+        <input type="number" id="income" name="income" required>
+        <input type="submit" value="Calculate Tax">
+    </form>
+    <table id="taxDetails" style="display:none;">
+        <tr>
+            <th>Income</th>
+            <td id="incomeDisplay"></td>
+        </tr>
+        <tr>
+            <th>Income Tax</th>
+            <td id="incomeTax"></td>
+        </tr>
+        <tr>
+            <th>Surcharge</th>
+            <td id="surcharge"></td>
+        </tr>
+        <tr>
+            <th>Cess</th>
+            <td id="cess"></td>
+        </tr>
+        <tr>
+            <th>Total Tax Liability</th>
+            <td id="totalTax"></td>
+        </tr>
+    </table>
+</div>
+
+<script>
+    document.getElementById('taxForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var status = document.getElementById('status').value;
+        var income = parseFloat(document.getElementById('income').value);
+        var taxDetails = calculateTax(income, status);
+        displayTaxDetails(taxDetails);
+    });
+
+    function calculateTax(income, status) {
+        var taxSlabs;
+        if (status === 'individual') {
+            taxSlabs = [
+                { min: 0, max: 250000, rate: 0 },
+                { min: 250001, max: 500000, rate: 0.05 },
+                { min: 500001, max: 1000000, rate: 0.2 },
+                { min: 1000001, max: Infinity, rate: 0.3 }
+            ];
+        } else if (status === 'senior') {
+            taxSlabs = [
+                { min: 0, max: 300000, rate: 0 },
+                { min: 300001, max: 500000, rate: 0.05 },
+                { min: 500001, max: 1000000, rate: 0.2 },
+                { min: 1000001, max: Infinity, rate: 0.3 }
+            ];
+        } else if (status === 'superSenior') {
+            taxSlabs = [
+                { min: 0, max: 500000, rate: 0 },
+                { min: 500001, max: 1000000, rate: 0.05 },
+                { min: 1000001, max: Infinity, rate: 0.3 }
+            ];
+        }
+
+        var tax = 0;
+        var remainingIncome = income;
+
+        taxSlabs.forEach(function(slabs) {
+            var taxableIncome = Math.min(remainingIncome, slabs.max - slabs.min);
+            tax += taxableIncome * slabs.rate;
+            remainingIncome -= taxableIncome;
+        });
+
+        return {
+            income: income.toFixed(2),
+            incomeTax: tax.toFixed(2),
+            surcharge: (tax * 0.1).toFixed(2), // Surcharge at 10% of tax
+            cess: (tax * 0.04).toFixed(2), // Health and Education cess at 4% of tax
+            totalTax: (tax + tax * 0.1 + tax * 0.04).toFixed(2) // Total tax liability
+        };
+    }
+
+    function displayTaxDetails(taxDetails) {
+        document.getElementById('incomeDisplay').textContent = taxDetails.income + " INR";
+        document.getElementById('incomeTax').textContent = taxDetails.incomeTax + " INR";
+        document.getElementById('surcharge').textContent = taxDetails.surcharge + " INR";
+        document.getElementById('cess').textContent = taxDetails.cess + " INR";
+        document.getElementById('totalTax').textContent = taxDetails.totalTax + " INR";
+        document.getElementById('taxDetails').style.display = 'table';
+    }
+</script>
+
+</body>
+</html>
+</div>
+<div id="wb_PageHeader">
+<div id="PageHeader">
+<div class="row">
+<div class="col-1">
+<div id="wb_PanelMenu1" style="display:inline-block;width:63px;height:70px;z-index:0;">
+<a href="#PanelMenu1_markup" id="PanelMenu1">&nbsp;</a>
+<div id="PanelMenu1_markup">
+<ul role="menu">
+<li role="menuitem"><a href="#" class="nav-link"><i class="fa fa-home fa-fw"></i><span>Home</span></a></li>
+<li role="menuitem"><a href="#" class="nav-link"><i class="fa fa-user fa-fw"></i><span>About Me</span></a></li>
+<li role="menuitem"><a href="#" class="nav-link"><i class="fa fa-camera fa-fw"></i><span>Gallery</span></a></li>
+<li role="menuitem"><a href="#" class="nav-link"><i class="fa fa-pencil fa-fw"></i><span>Blog</span></a></li>
+<li role="menuitem"><a href="#" class="nav-link"><i class="fa fa-link fa-fw"></i><span>Links</span></a></li>
+</ul>
+</div>
+
+</div>
+<div id="wb_Text1">
+<p>Welcome </p>
+</div>
+</div>
+<div class="col-2">
+<div id="wb_Heading1" style="display:inline-block;width:100%;z-index:2;">
+<h3 id="Heading1">AVUR (Beta)<br></h3>
+</div>
+</div>
+<div class="col-3">
+<div id="wb_FontAwesomeIcon1" style="display:inline-block;width:40px;height:40px;text-align:center;z-index:3;">
+<a href="./index.html#the_end"><div id="FontAwesomeIcon1"><i class="fa fa-android"></i></div></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

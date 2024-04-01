@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Page</title>
+<meta name="generator" content="WYSIWYG Web Builder 18 - https://www.wysiwygwebbuilder.com">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="font-awesome.min.css" rel="stylesheet">
+<link href="Untitled1.css" rel="stylesheet">
+<link href="bmc.css" rel="stylesheet">
+<script src="jquery-3.6.0.min.js"></script>
+<script src="wb.panel.min.js"></script>
+<script>
+$(document).ready(function()
+{
+   $("#PanelMenu1").panel({animate: true, animationDuration: 200, animationEasing: 'linear', dismissible: true, display: 'overlay', position: 'right', toggle: true, overlay: true});
+});
+</script>
+</head>
+<body>
+<div id="Html1" style="position:absolute;left:22px;top:289px;width:100px;height:100px;z-index:4">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Body Metrics Calculator</title>
+</head>
+<body>
+
+<div class="calculator-widget">
+    <h2>Body Metrics Calculator</h2>
+    <label for="height">Height (cm):</label>
+    <input type="number" id="height">
+    <label for="weight">Weight (kg):</label>
+    <input type="number" id="weight">
+    <button onclick="calculate()">Calculate</button>
+    <br>
+    <label for="idealWeight">Ideal Body Weight (kg):</label>
+    <span id="idealWeight"></span>
+    <label for="bodyFatPercentage">Body Fat Percentage (%):</label>
+    <span id="bodyFatPercentage"></span>
+    <label for="bmi">Body Mass Index (BMI):</label>
+    <span id="bmi"></span>
+</div>
+
+<script>
+    // Function to calculate body metrics
+    function calculate() {
+        var height = parseFloat(document.getElementById('height').value);
+        var weight = parseFloat(document.getElementById('weight').value);
+
+        // Calculate ideal body weight using the Hamwi method
+        var idealWeightMale = 48 + 2.7 * ((height / 2.54) - 60);
+        var idealWeightFemale = 45.5 + 2.2 * ((height / 2.54) - 60);
+        var idealWeight = (height >= 152.4) ? idealWeightMale : idealWeightFemale;
+
+        // Calculate body fat percentage using the YMCA formula
+        var bodyFatPercentage = (1.2 * weight / Math.pow(height / 100, 2)) + (0.23 * 20) - 5.4;
+
+        // Calculate BMI
+        var bmi = weight / Math.pow(height / 100, 2);
+
+        // Display calculated values
+        document.getElementById('idealWeight').innerText = idealWeight.toFixed(2);
+        document.getElementById('bodyFatPercentage').innerText = bodyFatPercentage.toFixed(2);
+        document.getElementById('bmi').innerText = bmi.toFixed(2);
+    }
+</script>
+
+</body>
+</html>
+</div>
+<div id="wb_PageHeader">
+<div id="PageHeader">
+<div class="row">
+<div class="col-1">
+<div id="wb_PanelMenu1" style="display:inline-block;width:63px;height:70px;z-index:0;">
+<a href="#PanelMenu1_markup" id="PanelMenu1">&nbsp;</a>
+<div id="PanelMenu1_markup">
+<ul role="menu">
+<li role="menuitem"><a href="#" class="nav-link"><i class="fa fa-home fa-fw"></i><span>Home</span></a></li>
+<li role="menuitem"><a href="#" class="nav-link"><i class="fa fa-user fa-fw"></i><span>About Me</span></a></li>
+<li role="menuitem"><a href="#" class="nav-link"><i class="fa fa-camera fa-fw"></i><span>Gallery</span></a></li>
+<li role="menuitem"><a href="#" class="nav-link"><i class="fa fa-pencil fa-fw"></i><span>Blog</span></a></li>
+<li role="menuitem"><a href="#" class="nav-link"><i class="fa fa-link fa-fw"></i><span>Links</span></a></li>
+</ul>
+</div>
+
+</div>
+<div id="wb_Text1">
+<p>Welcome </p>
+</div>
+</div>
+<div class="col-2">
+<div id="wb_Heading2" style="display:inline-block;width:100%;z-index:2;">
+<h3 id="Heading2">AVUR (Beta)<br></h3>
+</div>
+</div>
+<div class="col-3">
+<div id="wb_FontAwesomeIcon1" style="display:inline-block;width:40px;height:40px;text-align:center;z-index:3;">
+<a href="./index.html#the_end"><div id="FontAwesomeIcon1"><i class="fa fa-android"></i></div></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

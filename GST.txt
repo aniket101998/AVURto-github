@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GST Calculator Widget</title>
+<style>
+    /* Widget styles */
+    .gst-widget {
+        font-family: Arial, sans-serif;
+        background-color: #f8f8f8;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        width: 300px;
+    }
+
+    /* Heading styles */
+    .gst-widget h2 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    /* Input and button styles */
+    .gst-widget input[type="number"] {
+        padding: 8px;
+        margin: 5px;
+        border: none;
+        border-radius: 3px;
+    }
+
+    .gst-widget button {
+        padding: 8px;
+        margin: 5px;
+        border: none;
+        border-radius: 3px;
+        background-color: #2ecc71; /* Green color */
+        color: white;
+        cursor: pointer;
+    }
+
+    /* Button hover effect */
+    .gst-widget button:hover {
+        opacity: 0.8;
+    }
+
+    /* Result label styles */
+    .gst-widget label {
+        margin-top: 10px;
+        display: block;
+    }
+
+    .gst-widget span {
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+
+<div class="gst-widget">
+    <h2>GST Calculator</h2>
+    <input type="number" id="costInput" placeholder="Cost">
+    <input type="number" id="gstInput" placeholder="GST (%)">
+    <button onclick="calculate()">Calculate</button>
+    <br>
+    <label for="salePrice">Sale Price:</label>
+    <span id="salePrice"></span>
+</div>
+
+<script>
+    // Function to calculate sale price
+    function calculate() {
+        var cost = parseFloat(document.getElementById('costInput').value);
+        var gst = parseFloat(document.getElementById('gstInput').value);
+
+        if (!isNaN(cost) && !isNaN(gst)) {
+            var salePrice = cost * (1 + gst / 100);
+            document.getElementById('salePrice').innerText = salePrice.toFixed(2);
+        } else {
+            alert('Please enter valid numbers for Cost and GST.');
+        }
+    }
+</script>
+
+</body>
+</html>

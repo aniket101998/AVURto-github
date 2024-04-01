@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temperature Units Converter</title>
+<style>
+    /* Widget styles */
+    .converter-widget {
+        font-family: Arial, sans-serif;
+        background-color: #f8f8f8;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        width: 300px;
+    }
+
+    /* Heading styles */
+    .converter-widget h2 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    /* Input and button styles */
+    .converter-widget input[type="number"] {
+        padding: 8px;
+        margin: 5px;
+        border: none;
+        border-radius: 3px;
+        width: calc(50% - 10px);
+    }
+
+    .converter-widget select {
+        padding: 8px;
+        margin: 5px;
+        border: none;
+        border-radius: 3px;
+        width: calc(50% - 10px);
+    }
+
+    .converter-widget button {
+        padding: 8px;
+        margin: 5px;
+        border: none;
+        border-radius: 3px;
+        background-color: #2ecc71; /* Green color */
+        color: white;
+        cursor: pointer;
+    }
+
+    /* Button hover effect */
+    .converter-widget button:hover {
+        opacity: 0.8;
+    }
+
+    /* Result label styles */
+    .converter-widget label {
+        margin-top: 10px;
+        display: block;
+    }
+
+    .converter-widget span {
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+
+<div class="converter-widget">
+    <h2>Temperature Units Converter</h2>
+    <input type="number" id="tempInputValue" placeholder="Value">
+    <select id="tempFromUnit">
+        <option value="celsius">Celsius (°C)</option>
+        <option value="fahrenheit">Fahrenheit (°F)</option>
+        <option value="kelvin">Kelvin (K)</option>
+    </select>
+    <select id="tempToUnit">
+        <option value="celsius">Celsius (°C)</option>
+        <option value="fahrenheit">Fahrenheit (°F)</option>
+        <option value="kelvin">Kelvin (K)</option>
+    </select>
+    <button onclick="convertTemperature()">Convert</button>
+    <br>
+    <label for="convertedTempValue">Converted Value:</label>
+    <span id="convertedTempValue"></span>
+</div>
+
+<script>
+    // Function to perform temperature conversion
+    function convertTemperature() {
+        var tempInputValue = parseFloat(document.getElementById('tempInputValue').value);
+        var tempFromUnit = document.getElementById('tempFromUnit').value;
+        var tempToUnit = document.getElementById('tempToUnit').value;
+        var convertedTempValue;
+
+        // Perform temperature conversion based on selected units
+        switch(tempFromUnit) {
+            case 'celsius':
+                switch(tempToUnit) {
+                    case 'fahrenheit':
+                        convertedTempValue = (tempInputValue * 9/5) + 32;
+                        break;
+                    case 'kelvin':
+                        convertedTempValue = tempInputValue + 273.15;
+                        break;
+                    default:
+                        convertedTempValue = tempInputValue;
+                }
+                break;
+            case 'fahrenheit':
+                // Handle other conversions for 'fahrenheit' unit
+                // Similar cases for other units can be added here
+                break;
+            // Add cases for other units as needed
+            default:
+                convertedTempValue = tempInputValue;
+        }
+
+        // Display converted temperature value
+        document.getElementById('convertedTempValue').innerText = convertedTempValue.toFixed(2);
+    }
+</script>
+
+</body>
+</html>

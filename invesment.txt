@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investment Return Calculator (Rs)</title>
+<style>
+    /* Widget styles */
+    .calculator-widget {
+        font-family: Arial, sans-serif;
+        background-color: #f8f8f8;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        width: 300px;
+    }
+
+    /* Heading styles */
+    .calculator-widget h2 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    /* Input and button styles */
+    .calculator-widget input[type="number"] {
+        padding: 8px;
+        margin: 5px;
+        border: none;
+        border-radius: 3px;
+        max-width: calc(100% - 10px); /* Set maximum width */
+    }
+
+    .calculator-widget button {
+        padding: 8px;
+        margin: 5px;
+        border: none;
+        border-radius: 3px;
+        background-color: #2ecc71; /* Green color */
+        color: white;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    /* Button hover effect */
+    .calculator-widget button:hover {
+        opacity: 0.8;
+    }
+
+    /* Result label styles */
+    .calculator-widget label {
+        margin-top: 10px;
+        display: block;
+    }
+
+    .calculator-widget span {
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+
+<div class="calculator-widget">
+    <h2>Investment Return Calculator (Rs)</h2>
+    <label for="initialInvestment">Initial Investment (Rs):</label>
+    <input type="number" id="initialInvestment" style="max-width: 150px;">
+    <label for="finalValue">Final Value (Rs):</label>
+    <input type="number" id="finalValue" style="max-width: 150px;">
+    <label for="investmentPeriod">Investment Period (years):</label>
+    <input type="number" id="investmentPeriod" style="max-width: 150px;">
+    <button onclick="calculateReturn()">Calculate</button>
+    <br>
+    <label for="netReturn">Net Return (Rs):</label>
+    <span id="netReturn"></span>
+    <label for="annualizedReturn">Annualized Return (%):</label>
+    <span id="annualizedReturn"></span>
+</div>
+
+<script>
+    // Function to calculate investment return
+    function calculateReturn() {
+        var initialInvestment = parseFloat(document.getElementById('initialInvestment').value);
+        var finalValue = parseFloat(document.getElementById('finalValue').value);
+        var investmentPeriod = parseFloat(document.getElementById('investmentPeriod').value);
+
+        // Calculate net return
+        var netReturn = finalValue - initialInvestment;
+
+        // Calculate annualized return
+        var annualizedReturn = ((Math.pow((finalValue / initialInvestment), (1 / investmentPeriod)) - 1) * 100).toFixed(2);
+
+        // Display calculated values
+        document.getElementById('netReturn').innerText = netReturn.toFixed(2);
+        document.getElementById('annualizedReturn').innerText = annualizedReturn;
+    }
+</script>
+
+</body>
+</html>

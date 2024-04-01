@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Length Units Converter</title>
+<style>
+    /* Widget styles */
+    .converter-widget {
+        font-family: Arial, sans-serif;
+        background-color: #f8f8f8;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        width: 300px;
+    }
+
+    /* Heading styles */
+    .converter-widget h2 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    /* Input and button styles */
+    .converter-widget input[type="number"] {
+        padding: 8px;
+        margin: 5px;
+        border: none;
+        border-radius: 3px;
+        width: calc(50% - 10px);
+    }
+
+    .converter-widget select {
+        padding: 8px;
+        margin: 5px;
+        border: none;
+        border-radius: 3px;
+        width: calc(50% - 10px);
+    }
+
+    .converter-widget button {
+        padding: 8px;
+        margin: 5px;
+        border: none;
+        border-radius: 3px;
+        background-color: #2ecc71; /* Green color */
+        color: white;
+        cursor: pointer;
+    }
+
+    /* Button hover effect */
+    .converter-widget button:hover {
+        opacity: 0.8;
+    }
+
+    /* Result label styles */
+    .converter-widget label {
+        margin-top: 10px;
+        display: block;
+    }
+
+    .converter-widget span {
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+
+<div class="converter-widget">
+    <h2>Length Units Converter</h2>
+    <input type="number" id="inputValue" placeholder="Value">
+    <select id="fromUnit">
+        <option value="meter">Meter (m)</option>
+        <option value="foot">Foot (ft)</option>
+        <option value="inch">Inch (in)</option>
+        <option value="centimeter">Centimeter (cm)</option>
+        <option value="kilometer">Kilometer (km)</option>
+        <option value="mile">Mile (mi)</option>
+    </select>
+    <select id="toUnit">
+        <option value="meter">Meter (m)</option>
+        <option value="foot">Foot (ft)</option>
+        <option value="inch">Inch (in)</option>
+        <option value="centimeter">Centimeter (cm)</option>
+        <option value="kilometer">Kilometer (km)</option>
+        <option value="mile">Mile (mi)</option>
+    </select>
+    <button onclick="convertLength()">Convert</button>
+    <br>
+    <label for="convertedValue">Converted Value:</label>
+    <span id="convertedValue"></span>
+</div>
+
+<script>
+    // Function to perform length conversion
+    function convertLength() {
+        var inputValue = parseFloat(document.getElementById('inputValue').value);
+        var fromUnit = document.getElementById('fromUnit').value;
+        var toUnit = document.getElementById('toUnit').value;
+        var convertedValue;
+
+        // Perform length conversion based on selected units
+        switch(fromUnit) {
+            case 'meter':
+                switch(toUnit) {
+                    case 'foot':
+                        convertedValue = inputValue * 3.28084;
+                        break;
+                    case 'inch':
+                        convertedValue = inputValue * 39.3701;
+                        break;
+                    case 'centimeter':
+                        convertedValue = inputValue * 100;
+                        break;
+                    case 'kilometer':
+                        convertedValue = inputValue / 1000;
+                        break;
+                    case 'mile':
+                        convertedValue = inputValue / 1609.34;
+                        break;
+                    default:
+                        convertedValue = inputValue;
+                }
+                break;
+            case 'foot':
+                // Handle other conversions for 'foot' unit
+                // Similar cases for other units can be added here
+                break;
+            // Add cases for other units as needed
+            default:
+                convertedValue = inputValue;
+        }
+
+        // Display converted value
+        document.getElementById('convertedValue').innerText = convertedValue.toFixed(2);
+    }
+</script>
+
+</body>
+</html>

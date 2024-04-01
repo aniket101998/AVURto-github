@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Body Metrics Calculator</title>
+<style>
+    /* Widget styles */
+    .calculator-widget {
+        font-family: Arial, sans-serif;
+        background-color: #f8f8f8;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        width: 300px;
+    }
+
+    /* Heading styles */
+    .calculator-widget h2 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    /* Input and button styles */
+    .calculator-widget input[type="number"] {
+        padding: 8px;
+        margin: 5px;
+        border: none;
+        border-radius: 3px;
+        width: calc(100% - 10px);
+    }
+
+    .calculator-widget button {
+        padding: 8px;
+        margin: 5px;
+        border: none;
+        border-radius: 3px;
+        background-color: #2ecc71; /* Green color */
+        color: white;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    /* Button hover effect */
+    .calculator-widget button:hover {
+        opacity: 0.8;
+    }
+
+    /* Result label styles */
+    .calculator-widget label {
+        margin-top: 10px;
+        display: block;
+    }
+
+    .calculator-widget span {
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+
+<div class="calculator-widget">
+    <h2>Body Metrics Calculator</h2>
+    <label for="height">Height (cm):</label>
+    <input type="number" id="height">
+    <label for="weight">Weight (kg):</label>
+    <input type="number" id="weight">
+    <button onclick="calculate()">Calculate</button>
+    <br>
+    <label for="idealWeight">Ideal Body Weight (kg):</label>
+    <span id="idealWeight"></span>
+    <label for="bodyFatPercentage">Body Fat Percentage (%):</label>
+    <span id="bodyFatPercentage"></span>
+    <label for="bmi">Body Mass Index (BMI):</label>
+    <span id="bmi"></span>
+</div>
+
+<script>
+    // Function to calculate body metrics
+    function calculate() {
+        var height = parseFloat(document.getElementById('height').value);
+        var weight = parseFloat(document.getElementById('weight').value);
+
+        // Calculate ideal body weight using the Hamwi method
+        var idealWeightMale = 48 + 2.7 * ((height / 2.54) - 60);
+        var idealWeightFemale = 45.5 + 2.2 * ((height / 2.54) - 60);
+        var idealWeight = (height >= 152.4) ? idealWeightMale : idealWeightFemale;
+
+        // Calculate body fat percentage using the YMCA formula
+        var bodyFatPercentage = (1.2 * weight / Math.pow(height / 100, 2)) + (0.23 * 20) - 5.4;
+
+        // Calculate BMI
+        var bmi = weight / Math.pow(height / 100, 2);
+
+        // Display calculated values
+        document.getElementById('idealWeight').innerText = idealWeight.toFixed(2);
+        document.getElementById('bodyFatPercentage').innerText = bodyFatPercentage.toFixed(2);
+        document.getElementById('bmi').innerText = bmi.toFixed(2);
+    }
+</script>
+
+</body>
+</html>

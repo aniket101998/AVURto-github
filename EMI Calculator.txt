@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EMI Calculator</title>
+<style>
+  /* CSS styles for the widget */
+  .widget-container {
+    width: 300px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+
+  .widget-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .input-label {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  .input-field {
+    width: calc(100% - 18px);
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  .calculate-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .calculate-button:hover {
+    background-color: #45a049;
+  }
+
+  #result {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+</style>
+</head>
+<body>
+
+<div class="widget-container">
+  <h2 class="widget-title">EMI Calculator</h2>
+  <label for="loan-amount" class="input-label">Loan Amount (₹):</label>
+  <input type="number" id="loan-amount" class="input-field" placeholder="Enter loan amount" required>
+  <label for="interest-rate" class="input-label">Interest Rate (% per annum):</label>
+  <input type="number" id="interest-rate" class="input-field" placeholder="Enter interest rate" required>
+  <label for="loan-term" class="input-label">Loan Term (years):</label>
+  <input type="number" id="loan-term" class="input-field" placeholder="Enter loan term" required>
+  <button onclick="calculateEMI()" class="calculate-button">Calculate EMI</button>
+  <p id="result"></p>
+</div>
+
+<script>
+  // JavaScript function to calculate EMI
+  function calculateEMI() {
+    var loanAmount = parseFloat(document.getElementById('loan-amount').value);
+    var interestRate = parseFloat(document.getElementById('interest-rate').value) / 100 / 12; // Monthly interest rate
+    var loanTermMonths = parseFloat(document.getElementById('loan-term').value) * 12; // Loan term in months
+
+    var emi = (loanAmount * interestRate * Math.pow(1 + interestRate, loanTermMonths)) / (Math.pow(1 + interestRate, loanTermMonths) - 1);
+
+    document.getElementById('result').innerHTML = "EMI: ₹" + emi.toFixed(2);
+  }
+</script>
+
+</body>
+</html>
